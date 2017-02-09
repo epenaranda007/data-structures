@@ -7,28 +7,21 @@ var LinkedList = function() {
     var node = Node(value);
     list[value] = node;
     
-    // nothing in the list
     if (list.head === null && list.tail === null) {
       list.tail = node;
       list.head = node;
     } else {
-      list.tail = node;
-      list.head.next = node;
-    }
-
-    // if there stuff in the list
-    
+      list.tail.next = node;
+      list.tail = node; 
+    } 
   };
 
   list.removeHead = function() {
-    var remVal = list.head.value;
     var remHead = list.head;
-    
     delete list.head;
-
     list.head = remHead.next;
 
-    return remVal;
+    return remHead.value;
   };
 
   list.contains = function(target, node) {
@@ -57,4 +50,7 @@ var Node = function(value) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
+    addToTail - constant
+    removeHead - constant
+    contains - linear
  */
