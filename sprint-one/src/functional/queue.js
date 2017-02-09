@@ -10,19 +10,16 @@ var Queue = function() {
   // Implement the methods below
 
   someInstance.enqueue = function(value) {
-    debugger;
     storage[eqCounter] = value;
     eqCounter++;
-    //dqCounter++;
     length++;
   };
 
   someInstance.dequeue = function() {
-    debugger;
     var dqd = storage[dqCounter];
     delete storage[dqCounter];
     dqCounter++;
-    
+
     if (length > 0) {
       length--;
     }
