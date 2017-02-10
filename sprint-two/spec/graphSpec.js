@@ -68,4 +68,24 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+// Additonal
+  
+  it('Add\'l: nodes should be to able to have multiple edges', function() {
+    graph.addNode(4);
+    graph.addNode(5);
+    graph.addNode(3);
+    graph.addNode(3256);
+
+    graph.addEdge(5, 4);
+    graph.addEdge(5, 3);
+    graph.addEdge(5, 3256);
+
+    expect(graph.hasEdge(5, 4)).to.equal(true);
+    expect(graph.hasEdge(5, 3)).to.equal(true);
+    expect(graph.hasEdge(5, 3256)).to.equal(true);
+    expect(Object.keys(graph.container['5']['edges']).length).to.equal(3);
+  });
+
+
+
 });

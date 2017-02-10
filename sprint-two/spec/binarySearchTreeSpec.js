@@ -36,4 +36,35 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5, 2, 3]);
   });
+
+  // Additional Tests
+  it('Add\'l: the end of the tree should have no children', function() {
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(1);
+
+    expect(binarySearchTree.left.right.left).to.equal(null);
+    expect(binarySearchTree.left.right.right).to.equal(null);
+    expect(binarySearchTree.left.left.left.left).to.equal(null);
+    expect(binarySearchTree.left.left.left.right).to.equal(null);
+
+  });
+
+  it('Add\'l: a tree can have one or two children', function() {
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(9);
+
+    expect(binarySearchTree.left.left.value).to.equal(2);
+    expect(binarySearchTree.left.right.value).to.equal(4);
+    expect(binarySearchTree.right.right.value).to.equal(9);
+    expect(binarySearchTree.right.left).to.equal(null);
+
+  });
+
+
 });

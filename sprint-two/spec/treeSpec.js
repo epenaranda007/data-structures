@@ -40,5 +40,15 @@ describe('tree', function() {
     expect(tree.contains(7)).to.equal(true);
     expect(tree.contains(8)).to.equal(true);
   });
+  // Add extra tests here
+  it('Add\'l: should detect correct number of children after adding multiple children', function() {
+    tree.addChild(5);
+    tree.addChild(622);
+    tree.addChild(79272);
+    tree.addChild(2452222);
+    tree.addChild(32098226);
+
+    expect(tree.children.length).to.equal(5);
+  });
 
 });

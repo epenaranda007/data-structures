@@ -24,4 +24,17 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  //Addtional Tests
+  it('Add\'l: should return true if set contains a value', function() {
+    set.add('The Predator');
+    expect(set.contains('The Predator')).to.equal(true);
+  });
+
+  it('Add\'l: should return false if set does not contains a value', function() {
+    set.add('The Predator');
+    set.add('The Alien');
+    set.remove('The Alien');
+    expect(set.contains('The Alien')).to.equal(false);
+  });
+
 });
