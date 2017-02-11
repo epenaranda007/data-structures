@@ -1,5 +1,4 @@
 var BinarySearchTree = function(value) {
-  //debugger;
   var bstObj = Object.create(bstMethods);
   bstObj.value = value;
   bstObj.left = null;
@@ -30,14 +29,10 @@ bstMethods.insert = function(value) {
 bstMethods.contains = function(value) {
   if (this.value === value) {
     return true;
-  } else if (value < this.value) {
-    if (this.left) {
-      return this.left.contains(value);
-    }
-  } else if (value > this.value) {
-    if (this.right) {
-      return this.right.contains(value);
-    }
+  } else if (this.left && value < this.value) {
+    return this.left.contains(value);
+  } else if (this.right && value > this.value) {
+    return this.right.contains(value);
   }
   return false;
 };

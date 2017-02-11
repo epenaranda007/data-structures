@@ -28,7 +28,7 @@ var LinkedList = function() {
     node = node || list.head;
     if (node.value === target) {
       return true;
-    } else if (node.next === null) {
+    } else if (!node.next) {
       return false;
     } else {
       var nextNode = node.next;
