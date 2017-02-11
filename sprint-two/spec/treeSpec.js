@@ -51,4 +51,14 @@ describe('tree', function() {
     expect(tree.children.length).to.equal(5);
   });
 
+  it('Adv: Children should have proper parent', function() {
+    tree.addChild(5);
+    expect(tree.children[0].parent).to.equal(tree);
+  });
+
+  it('Adv: the root of the tree should have no parent', function() {
+    tree.addChild(5);
+    expect(tree.parent).to.equal(null);
+  });
+
 });
