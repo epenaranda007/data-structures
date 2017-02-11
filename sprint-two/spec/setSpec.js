@@ -37,4 +37,37 @@ describe('set', function() {
     expect(set.contains('The Alien')).to.equal(false);
   });
 
+  //Advanced Tests
+
+  it('Adv: should be able to handle strings and numbers', function() {
+    set.add(1);
+    set.add('1');
+    set.remove('The Alien');
+    expect(set.contains('The Alien')).to.equal(false);
+    expect(set.contains(1)).to.equal(true);
+    expect(set.contains('1')).to.equal(true);
+  });
+
+  it('Adv: should be able to handle objects of any type', function() {
+    set.add(1);
+    set.add('string');
+    set.add(undefined);
+    set.add(null);
+    set.add(true);
+    var obj = {1: 3};
+    var arr = [6, 7];
+    set.add(obj);
+    set.add(arr);
+
+    console.log(set);
+
+    expect(set.contains(1)).to.equal(true);
+    expect(set.contains('string')).to.equal(true);
+    expect(set.contains(undefined)).to.equal(false);
+    expect(set.contains(null)).to.equal(false);
+    expect(set.contains(true)).to.equal(true);
+    expect(set.contains(obj)).to.eql(true);
+    expect(set.contains(arr)).to.eql(true);
+  });
+
 });

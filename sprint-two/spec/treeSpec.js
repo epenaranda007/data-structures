@@ -69,7 +69,6 @@ describe('tree', function() {
     tree.children[0].addChild(5);
     var gotTree = tree.getTree(3);
     var gotOtherTree = tree.getTree(5);
-    console.log(gotTree);
     expect(gotTree.value).to.equal(3);
     expect(gotOtherTree.value).to.equal(5);
 
