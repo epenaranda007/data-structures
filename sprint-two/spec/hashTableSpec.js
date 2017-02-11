@@ -47,8 +47,15 @@ describe('hashTable', function() {
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
 
+  // Additional tests
+  it('should not contain values that were removed', function() {
+    hashTable.insert('Steven', 'Tyler');
+    hashTable.remove('Steven');
+    expect(hashTable.retrieve('Steven')).to.equal(undefined);
+  });
+
   // (Advanced! Remove the extra "x" when you want the following tests to run)
-  xit ('should double in size when needed', function() {
+  it ('should double in size when needed', function() {
     _.each(people, function(person) {
       var firstName = person[0];
       var lastName = person[1];
@@ -58,7 +65,7 @@ describe('hashTable', function() {
     expect(hashTable._limit).to.equal(16);
   });
 
-  xit ('should halve in size when needed', function() {
+  it ('should halve in size when needed', function() {
     _.each(people, function(person) {
       var firstName = person[0];
       var lastName = person[1];
@@ -73,4 +80,38 @@ describe('hashTable', function() {
     hashTable.remove('Mr.');
     expect(hashTable._limit).to.equal(8);
   });
+
+  it ('Add\'l: retrieval should work after size doubles', function() {
+    _.each(people, function(person) {
+      var firstName = person[0];
+      var lastName = person[1];
+      hashTable.insert(firstName, lastName);
+      expect(hashTable.retrieve(firstName)).to.equal(lastName);
+    });
+    expect(hashTable._limit).to.equal(16);
+    expect(hashTable.retrieve('Mr.')).to.equal('Doob');
+  });
+
+  it ('Add\'l: retrieval should work after size halves', function() {
+    _.each(people, function(person) {
+      var firstName = person[0];
+      var lastName = person[1];
+      hashTable.insert(firstName, lastName);
+      expect(hashTable.retrieve(firstName)).to.equal(lastName);
+    });
+    expect(hashTable._limit).to.equal(16);
+    hashTable.remove('George');
+    hashTable.remove('Dr.');
+    hashTable.remove('Steven');
+    hashTable.remove('John');
+    hashTable.remove('Mr.');
+    expect(hashTable._limit).to.equal(8);
+    expect(hashTable.retrieve('Brendan')).to.equal('Eich');
+  });
+
+/*
+var people = [['Steven', 'Tyler'], ['George', 'Harrison'], ['Mr.', 'Doob'], 
+['Dr.', 'Sunshine'], ['John', 'Resig'], ['Brendan', 'Eich'], ['Alan', 'Turing']];
+*/
+
 });
