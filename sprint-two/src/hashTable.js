@@ -14,14 +14,7 @@ HashTable.prototype.insert = function(k, v) {
 
   if (this.counter >= this._limit * .75) {
     this._limit *= 2;
-    this._storage = LimitedArray(this._limit);
-    for (var i = 0; i < this.nodes.length; i++) {
-      var tuple = this.nodes[i];
-      var key = tuple[0];
-      var value = tuple[1];
-      var index = this.getIndexBelowMaxForKey(key, this._limit);
-      this._storage.set(index, value, this._limit);
-    }
+    this.reHash();
   }
 };
 
@@ -33,8 +26,7 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var index = this.getIndexBelowMaxForKey(k, this._limit);
   this._storage.set(index, undefined, this._limit);
-
-  //maybe move to function
+  
   for (var i = 0; i < this.nodes.length; i++) {
     if (this.nodes[i][0] === k) {
       this.nodes.splice(i, 1);
@@ -43,14 +35,7 @@ HashTable.prototype.remove = function(k) {
 
   if (this.counter <= this._limit * .25) {
     this._limit /= 2;
-    this._storage = LimitedArray(this._limit);
-    for (var i = 0; i < this.nodes.length; i++) {
-      var tuple = this.nodes[i];
-      var key = tuple[0];
-      var value = tuple[1];
-      var index = this.getIndexBelowMaxForKey(key, this._limit);
-      this._storage.set(index, value, this._limit); 
-    }
+    this.reHash();
   }
   this.counter--;
 };
@@ -64,6 +49,18 @@ HashTable.prototype.getIndexBelowMaxForKey = function(str, max) {
   }
   return hash % max;
 };
+
+HashTable.prototype.reHash = function () {
+  this._storage = LimitedArray(this._limit);
+  for (var i = 0; i < this.nodes.length; i++) {
+    var tuple = this.nodes[i];
+    var key = tuple[0];
+    var value = tuple[1];
+    var index = this.getIndexBelowMaxForKey(key, this._limit);
+    this._storage.set(index, value, this._limit); 
+  }
+};
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
