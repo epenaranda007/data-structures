@@ -65,6 +65,19 @@ treeMethods.getTree = function (value, node) {
   return node;
 };
 
+treeMethods.traverse = function (cb) {
+  // run the cb on the value of the tree
+  cb(this.value);
+  if (this.children.length > 0) {
+    for (var i = 0; i < this.children.length; i++) {
+      this.children[i].traverse(cb);
+    }
+  }
+  // if children length is greater than 0
+    // run cb on the children
+
+};
+
 /*
  * Complexity: What is the time complexity of the above functions?
   addChild: constant O(1)

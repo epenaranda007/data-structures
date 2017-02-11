@@ -91,4 +91,23 @@ describe('tree', function() {
 
   });
 
+  it('Adv: should run callback on each node in tree', function() {
+    tree.addChild(1);
+    tree.addChild(2);
+    tree.addChild(3);
+    tree.children[0].addChild(4);
+    var array = [];
+    var otherArray = [];
+    var getValue = function(x) { array.push(x); };
+    tree.traverse(getValue);
+    tree.traverse(function(x) { otherArray.push(x * 2); });
+
+
+    expect(array).to.eql([0, 1, 4, 2, 3]);
+    expect(otherArray).to.eql([0, 2, 8, 4, 6]);
+
+
+  });
+
+
 });
