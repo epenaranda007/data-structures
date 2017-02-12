@@ -81,6 +81,14 @@ describe('doublyLinkedList', function() {
     expect(doublyLinkedList.head.value).to.equal(3);
   });
 
+  it('Add\'l: removeTail should remove tail of the list', function() {
+    doublyLinkedList.addToTail(4);
+    doublyLinkedList.addToTail(5);
+    doublyLinkedList.addToHead(3);
+    var tail = doublyLinkedList.removeTail();
+    expect(doublyLinkedList.tail.value).to.equal(4);
+    expect(tail.value).to.equal(5);
+  });
 
 
 });
