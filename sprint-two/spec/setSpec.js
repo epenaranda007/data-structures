@@ -59,8 +59,6 @@ describe('set', function() {
     set.add(obj);
     set.add(arr);
 
-    console.log(set);
-
     expect(set.contains(1)).to.equal(true);
     expect(set.contains('string')).to.equal(true);
     expect(set.contains(undefined)).to.equal(false);
