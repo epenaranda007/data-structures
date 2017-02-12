@@ -19,9 +19,13 @@ var DoublyLinkedList = function() {
 
   list.removeHead = function() {
     var remHead = list.head;
-    delete list.head;
-    list.head = remHead.next;
-    // list.head.previous = null;
+    var remHeadNext;
+    if (list.head.next) {
+      remHeadNext = list.head.next;
+      remHeadNext.previous = null;
+    }
+    
+    list.head = remHeadNext;
 
     return remHead.value;
   };
@@ -47,7 +51,7 @@ var DoublyLinkedList = function() {
   };
 
   list.removeTail = function(value) {
-
+    
   };
 
   return list;
