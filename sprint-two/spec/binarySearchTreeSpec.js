@@ -37,7 +37,20 @@ describe('binarySearchTree', function() {
     expect(array).to.eql([5, 2, 3]);
   });
 
-  // Additional Tests
+  it('Addl: should execute cd depthwise for non-linear tree using "depthFirstLog"', function() {
+    var array = [];
+    var func = function(value) { array.push(value); };
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(9);
+    binarySearchTree.depthFirstLog(func);
+    expect(array).to.eql([5, 2, 1, 3, 8, 7, 9]);
+  }); 
+
+  // Add'l Test
   it('Add\'l: the end of the tree should have no children', function() {
     binarySearchTree.insert(3);
     binarySearchTree.insert(2);
@@ -66,5 +79,24 @@ describe('binarySearchTree', function() {
 
   });
 
+  // Advanced Tests
+
+  it('Adv: should execute cd depthwise for BT with both left and right using "depthFirstLog"', function() {
+    var array = [];
+    var func = function(value) { array.push(value); };
+
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(1);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(9);
+
+    binarySearchTree.breadthFirstLog(func);
+    console.log(array);
+
+    expect(array).to.eql([5, 2, 8, 1, 3, 7, 9]);
+
+  });
 
 });

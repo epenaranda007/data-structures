@@ -47,6 +47,26 @@ bstMethods.depthFirstLog = function(cb) {
   }
 };
 
+bstMethods.breadthFirstLog = function(cb) {
+ var result = [];
+ cb(this.value);
+  if (this.left) {
+    cb(this.left.value);
+  }
+  if (this.right) {
+    cb(this.right.value);
+  }
+  result = result.concat(this.left.breadthFirstLog(cb)).concat(this.right.breadthFirstLog(cb));
+  // if (this.left) {
+  //   this.left.breadthFirstLog(cb);
+  // }
+
+  // if (this.right) {
+  //   this.right.breadthFirstLog(cb);
+  // }
+
+};
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
