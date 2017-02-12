@@ -48,23 +48,71 @@ bstMethods.depthFirstLog = function(cb) {
 };
 
 bstMethods.breadthFirstLog = function(cb) {
+  var valuesArray = [this.value];
   var result = [];
-  cb(this.value);
-  if (this.left) {
-    cb(this.left.value);
-  }
-  if (this.right) {
-    cb(this.right.value);
-  }
-  //result = result.concat(this.left.breadthFirstLog(cb)).concat(this.right.breadthFirstLog(cb));
-  // if (this.left) {
-  //   this.left.breadthFirstLog(cb);
-  // }
+  var context = this;
 
-  // if (this.right) {
-  //   this.right.breadthFirstLog(cb);
-  // }
+  var fetchNodes = function(contxt) {
+    var left = [];
+    var right = [];
+    var queue = [];
+    //debugger;
 
+    if (contxt.left) { //contxt && contxt.left
+      left.push(contxt.left.value);
+    }
+    if (contxt.right) { //contxt && contxt.right
+      right.push(contxt.right.value);
+    }
+
+    queue = left.concat(right); 
+
+    if (contxt.left) { //contxt && contxt.left
+      var leftFetch = fetchNodes(contxt.left);
+      if (leftFetch) {  
+        left.push(leftFetch);
+      }
+    }
+    if (contxt.right) { //contxt && contxt.right
+      var rightFetch = fetchNodes(contxt.right);
+      if (rightFetch) {  
+        right.push(rightFetch);
+      }
+    }
+    
+    queue = left.concat(right); 
+    
+    if (queue.length > 0) { return queue; }
+    return;
+
+  };
+  //debugger;
+  valuesArray = valuesArray.concat(fetchNodes(context));
+  //debugger;
+  //console.log(result);
+  //_.flatten(collection, true);
+  var currArrayLength = valuesArray.length;
+  var counter = 0;
+  var index = 0;
+  while (counter < currArrayLength) { //debugger;
+    if (!Array.isArray(valuesArray[index])) {
+      result.push(valuesArray.splice(index, 1)[0]);
+    } else {
+      index++;
+    }
+    counter++;
+    if (counter === currArrayLength) {
+      counter = 0;
+      valuesArray = _.flatten(valuesArray, true);
+      currArrayLength = valuesArray.length;
+      index = 0;
+    }
+  }
+  //debugger;
+  console.log(result);
+  for (var i = 0; i < result.length; i++) {
+    cb(result[i]);
+  }
 };
 
 
@@ -74,5 +122,4 @@ bstMethods.breadthFirstLog = function(cb) {
  contains: O(log n)
  depthFirstLog: O(n) 
 */
-
 
